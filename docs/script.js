@@ -26,20 +26,83 @@
   });
 
   map.on('load', function () {
-    // サークル設定
+  
+    // ラインのデータソース設定
     map.addSource('Stream', {
-        type: 'geojson',
-        data: 'https://github.io/magn01ia/Riverside/data/Stream.geojson'
+      type: 'geojson',
+      data: './data/Stream.geojson'
     });
-    // スタイル設定
+  
+    // ラインのデータソース設定
     map.addLayer({
-        'id': 'Stream',
-        'type': 'line',
-        'source': 'Stream',
-        //'layout': {},
-        //'paint': {
-          //  'line-color': '#FF0000'
-    })
+      "id": "Stream",
+      "type": "line",
+      "source": "Stream",
+      "layout": {},
+      "paint": {
+          'line-width': 2,
+          'line-opacity':0.5, 
+          'line-color': '#0000CD'
+      }
+    });
+    // ラインデータクリック時のアクション
+    map.on("click", "Stream", (e) => {
+      const props = e.features[0].properties;
+      const html = `<h2>${props.W05_004}</h2>`;
+      new maplibregl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(map);
+    });
+//------------------------------------------------------------------------
+     // ポリゴンのデータソース設定
+     map.addSource('WatershedBoundary', {
+      type: 'geojson',
+      data: './data/WatershedBoundary.geojson'
+    });
+  
+    // ポリゴンのデータソース設定
+    map.addLayer({
+      "id": "WatershedBoundary",
+      "type": "fill",
+      "source": "WatershedBoundary",
+      "layout": {},
+      "paint": {
+          //'full-width': 3,
+          'fill-opacity':0.1, 
+          'fill-color': '#40E0D0'
+      }
+    });
+    //ポリゴンのアウトライン設定
+    map.addLayer({
+      'id': 'outline',
+      'type': 'line',
+      'source': 'WatershedBoundary',
+      'layout': {},
+      'paint': {
+      'line-color': '#5F9EA0',
+      'line-width': 1
+      }
+    });
+//------------------------------------------------------------------
+    //ベクトルタイル表示、オーバーズーミングしないい
+    // map.addSource("mito", {
+    //   type: "vector",
+    //   tiles: [
+    //     "https://magn01ia.github.io/fudevt/mito/{z}/{x}/{y}.pbf"
+    //   ]
+    // });
+
+    // map.addLayer({
+    //   id: "fude",
+    //   type: "fill",
+    //   source: "mito",
+    //   "source-layer": "mito",
+    //   "minzoom": 9,
+    //   "maxzoom": 22,
+    //   paint: {
+    //     "fill-color": "#FF00FF",
+    //     "fill-opacity": 0.3,
+    //     "fill-outline-color": "white"
+    //   }
+    // });
   });
 
-map.addControl(new maplibregl.NavigationControl());
+  map.addControl(new maplibregl.FullscreenControl());
