@@ -24,3 +24,22 @@
     center: [139.9823,36.6761],
     zoom: 9
   });
+
+  map.on('load', function () {
+    // サークル設定
+    map.addSource('Stream', {
+        type: 'geojson',
+        data: 'https://github.io/magn01ia/Riverside/data/Stream.geojson'
+    });
+    // スタイル設定
+    map.addLayer({
+        'id': 'Stream',
+        'type': 'line',
+        'source': 'Stream',
+        //'layout': {},
+        //'paint': {
+          //  'line-color': '#FF0000'
+    })
+  });
+
+map.addControl(new maplibregl.NavigationControl());
