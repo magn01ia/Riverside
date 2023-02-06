@@ -1,6 +1,7 @@
 # Riverside  
 
 データがそろったらベクトルタイルにして遊ぶ予定  
+河川系のデータを追加していくはず  
 
 MapLibre  
 https://magn01ia.github.io/Riverside/  
