@@ -83,26 +83,26 @@
     });
 //------------------------------------------------------------------
     //ベクトルタイル表示、オーバーズーミングしないい
-    // map.addSource("mito", {
-    //   type: "vector",
-    //   tiles: [
-    //     "https://magn01ia.github.io/fudevt/mito/{z}/{x}/{y}.pbf"
-    //   ]
-    // });
+    map.addSource("mito", {
+      type: "vector",
+      tiles: [
+        "https://magn01ia.github.io/fudevt/mito/{z}/{x}/{y}.pbf"
+      ]
+    });
 
-    // map.addLayer({
-    //   id: "fude",
-    //   type: "fill",
-    //   source: "mito",
-    //   "source-layer": "mito",
-    //   "minzoom": 9,
-    //   "maxzoom": 22,
-    //   paint: {
-    //     "fill-color": "#FF00FF",
-    //     "fill-opacity": 0.3,
-    //     "fill-outline-color": "white"
-    //   }
-    // });
+    map.addLayer({
+      id: "fude",
+      type: "fill",
+      source: "mito",
+      "source-layer": "mito",
+      "minzoom": 9,
+      "maxzoom": 22,
+      paint: {
+        "fill-color": "#FF00FF",
+        "fill-opacity": 0.3,
+        "fill-outline-color": "white"
+      }
+    });
   });
 
   map.addControl(new maplibregl.FullscreenControl());
