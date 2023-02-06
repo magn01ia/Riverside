@@ -40,7 +40,7 @@
       "source": "Stream",
       "layout": {},
       "paint": {
-          'line-width': 2,
+          'line-width': 2.5,
           'line-opacity':0.5, 
           'line-color': '#0000CD'
       }
@@ -66,7 +66,7 @@
       "layout": {},
       "paint": {
           //'full-width': 3,
-          'fill-opacity':0.1, 
+          'fill-opacity':0, 
           'fill-color': '#40E0D0'
       }
     });
@@ -77,17 +77,19 @@
       'source': 'WatershedBoundary',
       'layout': {},
       'paint': {
-      'line-color': '#5F9EA0',
-      'line-width': 1
+      'line-color': '#ff1493 ',
+      'line-width': 0.5
       }
     });
 //------------------------------------------------------------------
-    //ベクトルタイル表示、オーバーズーミングしないい
+    //ベクトルタイル表示、オーバーズーミングしていない？
     map.addSource("mito", {
       type: "vector",
       tiles: [
         "https://magn01ia.github.io/fudevt/mito/{z}/{x}/{y}.pbf"
-      ]
+      ],
+      minzoom: 10,
+      maxzoom: 14, //ここでソースのズームレベルを指定してやらないとオーバーズーミングが効かない(空のズームレベルを表示してしまうため？)
     });
 
     map.addLayer({
