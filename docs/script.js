@@ -45,22 +45,22 @@
       }
     });
     // ラインデータのラベル表示設定
-    // map.addLayer({
-    //   'id': 'Label',
-    //   'type': 'symbol',
-    //   'source': 'Stream',
-    //   'layout': {
-    //   //'icon-image': 'custom-marker',
-    //   // get the year from the source's "year" property
-    //   'text-field': ['get', 'W05_004'],
-    //   // 'text-font': [
-    //   // 'Open Sans Semibold',
-    //   // 'Arial Unicode MS Bold'
-    //   // ],
-    //   'text-offset': [0, 1.25],
-    //   'text-anchor': 'top'
-    //   }
-    //   });
+    map.addLayer({
+      'id': 'Label',
+      'type': 'symbol',
+      'source': 'Stream',
+      'layout': {
+      //'icon-image': 'custom-marker',
+      // get the year from the source's "year" property
+      'text-field': ['get', 'W05_004'],
+      // 'text-font': [
+      // 'Open Sans Semibold',
+      // 'Arial Unicode MS Bold'
+      // ],
+      'text-offset': [0, 1.25],
+      'text-anchor': 'top'
+      }
+      });
 
     // 河川ラインデータクリック時のアクション
     map.on("click", "Stream", (e) => {
