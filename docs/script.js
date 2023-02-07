@@ -1,28 +1,38 @@
- var map = new maplibregl.Map({
-    container: "map",
-    style: {
-      version: 8,
-      sources: {
-        rtile: {
-          type: "raster",
-          tiles: ["https://tile.openstreetmap.jp/{z}/{x}/{y}.png"],
-          tileSize: 256,
-          attribution:
-            '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-        }
-      },
-      layers: [
-        {
-          id: "raster-tiles",
-          type: "raster",
-          source: "rtile",
-          minzoom: 0,
-          maxzoom: 22
-        }
-      ]
-    },
-    center: [139.9823,36.6761],
-    zoom: 9
+//コメントアウト部ラスタタイル
+//  var map = new maplibregl.Map({
+//     container: "map",
+//     style: {
+//       version: 8,
+//       sources: {
+//         rtile: {
+//           type: "raster",
+//           tiles: ["https://tile.openstreetmap.jp/{z}/{x}/{y}.png"],
+//           tileSize: 256,
+//           attribution:
+//             '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+//         }
+//       },
+//       layers: [
+//         {
+//           id: "raster-tiles",
+//           type: "raster",
+//           source: "rtile",
+//           minzoom: 0,
+//           maxzoom: 22
+//         }
+//       ]
+//     },
+//     center: [139.9823,36.6761],
+//     zoom: 9
+//   });
+
+var map = new maplibregl.Map({
+  container: 'map', // container id
+  style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/blank.json', // style URL
+  center: [140.084556, 36.104611], // starting position [lng, lat]
+  zoom: 7, // starting zoom
+  maxZoom: 4, // min zoom
+  maxZoom: 17 // max zoom
   });
 
   map.on('load', function () {
@@ -39,7 +49,7 @@
       "source": "Stream",
       "layout": {},
       "paint": {
-          'line-width': 2.5,
+          'line-width': 3,
           'line-opacity':0.5, 
           'line-color': '#0000CD'
       }
@@ -94,35 +104,36 @@
       'source': 'WatershedBoundary',
       'layout': {},
       'paint': {
-      'line-color': '#ff1493 ',
-      'line-width': 0.5
+      'line-color': '#000066',
+      'line-width': 1
       }
     });
-//------------------------------------------------------------------
+//------------------------------------------------------------------下記水戸ベクトル
     //ベクトルタイル表示、オーバーズーミングしていない？
-    map.addSource("mito", {
-      type: "vector",
-      tiles: [
-        "https://magn01ia.github.io/fudevt/mito/{z}/{x}/{y}.pbf"
-      ],
-      minzoom: 10,
-      maxzoom: 14, //ここでソースのズームレベルを指定してやらないとオーバーズーミングが効かない(空のズームレベルを表示してしまうため？)
-    });
+  //   map.addSource("mito", {
+  //     type: "vector",
+  //     tiles: [
+  //       "https://magn01ia.github.io/fudevt/mito/{z}/{x}/{y}.pbf"
+  //     ],
+  //     minzoom: 10,
+  //     maxzoom: 14, //ここでソースのズームレベルを指定してやらないとオーバーズーミングが効かない(空のズームレベルを表示してしまうため？)
+  //   });
 
-    map.addLayer({
-      id: "fude",
-      type: "fill",
-      source: "mito",
-      "source-layer": "mito",
-      "minzoom": 9,
-      "maxzoom": 22,
-      paint: {
-        "fill-color": "#FF00FF",
-        "fill-opacity": 0.3,
-        "fill-outline-color": "white"
-      }
-    });
-  });
+  //   map.addLayer({
+  //     id: "fude",
+  //     type: "fill",
+  //     source: "mito",
+  //     "source-layer": "mito",
+  //     "minzoom": 9,
+  //     "maxzoom": 22,
+  //     paint: {
+  //       "fill-color": "#FF00FF",
+  //       "fill-opacity": 0.3,
+  //       "fill-outline-color": "white"
+  //     }
+  //   });
+  
+　});
 
   map.addControl(new maplibregl.FullscreenControl());
 
@@ -140,15 +151,15 @@
         attribution: '© <a href="https://github.com/amx-project">法務省地図XMLアダプトプロジェクト</a>'
     });
 
-    //代表点の中身
+    //代表点のアウト
     map.addLayer({
         "id": "daihyo",
         "source": "pmtiles",
         "source-layer": "daihyo",
         "type": "circle",
         'paint': {
-            'circle-color': '#00bfff ',
-            'circle-blur': 0.1,
+            'circle-color': '#003333',
+            'circle-blur': 0.5,
             'circle-radius': 3
         }
     });
@@ -160,9 +171,9 @@
         "source-layer": "daihyo",
         "type": "circle",
         'paint': {
-            'circle-color': '#f0f8ff ',
+            'circle-color': '#00CCCC',
             //'circle-radius': 1
-            'circle-radius': 1.5
+            'circle-radius': 2
         }
     });
 
@@ -173,8 +184,8 @@
         "source-layer": "fude",
         "type": "line",
         "paint": {
-            'line-color': '#00bfff',
-            'line-width': 1,
+            'line-color': '#009966',
+            'line-width': 2,
         }
     });
 
@@ -185,7 +196,7 @@
         "source-layer": "fude",
         "type": "fill",
         "paint": {
-            'fill-color': '#e0ffff ',
+            'fill-color': '#00FFCC',
             'fill-opacity': 0.25,
         }
     });
