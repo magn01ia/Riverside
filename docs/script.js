@@ -125,3 +125,68 @@
   });
 
   map.addControl(new maplibregl.FullscreenControl());
+
+  //PMTilesプラグインの追加
+  let protocol = new pmtiles.Protocol();
+  maplibregl.addProtocol("pmtiles", protocol.tile);
+  const p = new pmtiles.PMTiles("https://x.optgeo.org/a.pmtiles")
+  protocol.add(p);
+
+  map.on('load', () => {
+    // 法務省地図XMLベクトルタイル追加
+    map.addSource("pmtiles", {
+        type: "vector",
+        url: "pmtiles://https://x.optgeo.org/a.pmtiles",
+        attribution: '© <a href="https://github.com/amx-project">法務省地図XMLアダプトプロジェクト</a>'
+    });
+
+    //代表点の中身
+    map.addLayer({
+        "id": "daihyo",
+        "source": "pmtiles",
+        "source-layer": "daihyo",
+        "type": "circle",
+        'paint': {
+            'circle-color': '#00bfff ',
+            'circle-blur': 0.1,
+            'circle-radius': 3
+        }
+    });
+
+    //代表点の中身 
+    map.addLayer({
+        "id": "daihyo2",
+        "source": "pmtiles",
+        "source-layer": "daihyo",
+        "type": "circle",
+        'paint': {
+            'circle-color': '#f0f8ff ',
+            //'circle-radius': 1
+            'circle-radius': 1.5
+        }
+    });
+
+    //筆ポリゴンのライン
+    map.addLayer({
+        "id": "fude-line",
+        "source": "pmtiles",
+        "source-layer": "fude",
+        "type": "line",
+        "paint": {
+            'line-color': '#00bfff',
+            'line-width': 1,
+        }
+    });
+
+    //筆ポリゴン
+    map.addLayer({
+        "id": "fude-poligon",
+        "source": "pmtiles",
+        "source-layer": "fude",
+        "type": "fill",
+        "paint": {
+            'fill-color': '#e0ffff ',
+            'fill-opacity': 0.25,
+        }
+    });
+  })
