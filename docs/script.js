@@ -152,17 +152,17 @@ var map = new maplibregl.Map({
     });
 
     //代表点のアウト
-    map.addLayer({
-        "id": "daihyo",
-        "source": "pmtiles",
-        "source-layer": "daihyo",
-        "type": "circle",
-        'paint': {
-            'circle-color': '#003333',
-            'circle-blur': 0.5,
-            'circle-radius': 3
-        }
-    });
+    // map.addLayer({
+    //     "id": "daihyo",
+    //     "source": "pmtiles",
+    //     "source-layer": "daihyo",
+    //     "type": "circle",
+    //     'paint': {
+    //         'circle-color': '00FFCC',
+    //         'circle-blur': 0.5,
+    //         'circle-radius': 3
+    //     }
+    // });
 
     //代表点の中身 
     map.addLayer({
