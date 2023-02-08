@@ -28,7 +28,7 @@
 
 var map = new maplibregl.Map({
   container: 'map', // container id
-  style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/blank.json', // style URL
+  style: 'https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/pale.json', // style URL
   center: [140.084556, 36.104611], // starting position [lng, lat]
   zoom: 7, // starting zoom
   maxZoom: 4, // min zoom
