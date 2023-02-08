@@ -68,7 +68,7 @@ var map = new maplibregl.Map({
       // 'Arial Unicode MS Bold'
       // ],
       'text-offset': [0, 1.25],
-      'text-anchor': 'top'
+      //'text-anchor': 'top'
       }
       });
 
@@ -78,6 +78,8 @@ var map = new maplibregl.Map({
       const html = `<h2>${props.W05_004}</h2>`;
       new maplibregl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(map);
     });
+    //河川ラインラベルのズームレベル表示設定
+    map.setLayerZoomRange('Label', 10, 22);
 //------------------------------------------------------------------------
      // ポリゴンのデータソース設定
      map.addSource('WatershedBoundary', {
@@ -201,3 +203,5 @@ var map = new maplibregl.Map({
         }
     });
   })
+  
+
