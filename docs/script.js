@@ -203,7 +203,7 @@ var map = new maplibregl.Map({
     new maplibregl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(map);
   });
   //河川ラインラベルのズームレベル表示設定
-  map.setLayerZoomRange('Label', 10, 22);
+  map.setLayerZoomRange('Label', 12, 22);
   
   })
   
