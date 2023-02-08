@@ -37,49 +37,7 @@ var map = new maplibregl.Map({
 
   map.on('load', function () {
   
-    // 河川ラインのデータソース
-    map.addSource('Stream', {
-      type: 'geojson',
-      data: './data/Stream.geojson'
-    });
-    // 河川ラインの表示設定
-    map.addLayer({
-      "id": "Stream",
-      "type": "line",
-      "source": "Stream",
-      "layout": {},
-      "paint": {
-          'line-width': 3,
-          'line-opacity':0.5, 
-          'line-color': '#0000CD'
-      }
-    });
-    // ラインデータのラベル表示設定
-    map.addLayer({
-      'id': 'Label',
-      'type': 'symbol',
-      'source': 'Stream',
-      'layout': {
-      //'icon-image': 'custom-marker',
-      // get the year from the source's "year" property
-      'text-field': ['get', 'W05_004'],
-      // 'text-font': [
-      // 'Open Sans Semibold',
-      // 'Arial Unicode MS Bold'
-      // ],
-      'text-offset': [0, 1.25],
-      //'text-anchor': 'top'
-      }
-      });
-
-    // 河川ラインデータクリック時のアクション
-    map.on("click", "Stream", (e) => {
-      const props = e.features[0].properties;
-      const html = `<h2>${props.W05_004}</h2>`;
-      new maplibregl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(map);
-    });
-    //河川ラインラベルのズームレベル表示設定
-    map.setLayerZoomRange('Label', 10, 22);
+    
 //------------------------------------------------------------------------
      // ポリゴンのデータソース設定
      map.addSource('WatershedBoundary', {
@@ -110,6 +68,7 @@ var map = new maplibregl.Map({
       'line-width': 1
       }
     });
+    
 //------------------------------------------------------------------下記水戸ベクトル
     //ベクトルタイル表示、オーバーズーミングしていない？
   //   map.addSource("mito", {
@@ -202,6 +161,50 @@ var map = new maplibregl.Map({
             'fill-opacity': 0.25,
         }
     });
+  // 河川ラインのデータソース
+  map.addSource('Stream', {
+    type: 'geojson',
+    data: './data/Stream.geojson'
+  });
+  // 河川ラインの表示設定
+  map.addLayer({
+    "id": "Stream",
+    "type": "line",
+    "source": "Stream",
+    "layout": {},
+    "paint": {
+        'line-width': 3,
+        'line-opacity':0.5, 
+        'line-color': '#0000CD'
+    }
+  });
+  // ラインデータのラベル表示設定
+  map.addLayer({
+    'id': 'Label',
+    'type': 'symbol',
+    'source': 'Stream',
+    'layout': {
+    //'icon-image': 'custom-marker',
+    // get the year from the source's "year" property
+    'text-field': ['get', 'W05_004'],
+    // 'text-font': [
+    // 'Open Sans Semibold',
+    // 'Arial Unicode MS Bold'
+    // ],
+    'text-offset': [0, 1.25],
+    'text-anchor': 'top'
+    }
+    });
+
+  // 河川ラインデータクリック時のアクション
+  map.on("click", "Stream", (e) => {
+    const props = e.features[0].properties;
+    const html = `<h2>${props.W05_004}</h2>`;
+    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(map);
+  });
+  //河川ラインラベルのズームレベル表示設定
+  map.setLayerZoomRange('Label', 10, 22);
+  
   })
   
 
