@@ -68,7 +68,7 @@ var map = new maplibregl.Map({
       'line-width': 1
       }
     });
-    
+    map.setLayerZoomRange('line', 12, 22);
 //------------------------------------------------------------------下記水戸ベクトル
     //ベクトルタイル表示、オーバーズーミングしていない？
   //   map.addSource("mito", {
